@@ -1,0 +1,6 @@
+.text {
+  color: red;
+  justify-content: center;
+  display: flex;
+  font-weight: bold;
+}

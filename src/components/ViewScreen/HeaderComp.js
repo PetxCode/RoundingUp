@@ -40,6 +40,18 @@ const HeaderComp = () => {
           </Link>
         </div>
 
+        <div>
+          <Link
+            style={{
+              color: "white",
+              cursor: "pointer",
+            }}
+            to="/post"
+          >
+            Make a Post
+          </Link>
+        </div>
+
         {activeUser ? (
           <Button
             onClick={() => {

@@ -25,6 +25,7 @@ const Registration = () => {
       email,
       password,
       userID: userFile.user.uid,
+      defaultImg: user.charAt(0),
     });
 
     hist.push("/");

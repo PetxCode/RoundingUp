@@ -10,13 +10,16 @@ const HomeScreen = () => {
   const [comment, setComment] = useState("");
 
   const getAllPost = async () => {
-    await donateDB.limit(3).onSnapshot((snapshot) => {
-      const r = [];
-      snapshot.forEach((doc) => {
-        r.push({ ...doc.data(), id: doc.id });
+    await donateDB
+      .orderBy("type", "desc")
+      .limit(3)
+      .onSnapshot((snapshot) => {
+        const r = [];
+        snapshot.forEach((doc) => {
+          r.push({ ...doc.data(), id: doc.id });
+        });
+        setPostData(r);
       });
-      setPostData(r);
-    });
   };
 
   useEffect(() => {

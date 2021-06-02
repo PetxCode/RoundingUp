@@ -1,29 +1,23 @@
 import React from "react";
 import "antd/dist/antd.css";
-import Registration from "./components/Registration/Registration";
-import HeaderComp from "./components/ViewScreen/HeaderComp";
-
+import LetBuild from "./StudyTime/LetBuild";
+import HeaderView from "./StudyTime/HeaderView";
+import NewHeader from "./StudyTime/NewHeader";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import HomeScreen from "./components/ViewScreen/HomeScreen";
-import DashBoard from "./components/ViewScreen/DashBoard";
-import { AuthProvider } from "./components/StateManagemnet/AuthState";
-import PrivateRoute from "./components/ViewScreen/PrivateRoute";
-import MakeAPost from "./components/View/MakeAPost";
+import About from "./StudyTime/About";
+import Contact from "./StudyTime/Contact";
 
 const App = () => {
   return (
     <div>
-      <AuthProvider>
-        <Router>
-          <HeaderComp />
-          <Switch>
-            <Route exact path="/" component={HomeScreen} />
-            <PrivateRoute exact path="/dash" component={DashBoard} />
-            <PrivateRoute exact path="/post" component={MakeAPost} />
-            <Route exact path="/reg" component={Registration} />
-          </Switch>
-        </Router>
-      </AuthProvider>
+      <Router>
+        <HeaderView />
+        <Switch>
+          <Route path="/" exact component={LetBuild} />
+          <Route path="/about" exact component={About} />
+          <Route path="/contact" exact component={Contact} />
+        </Switch>
+      </Router>
     </div>
   );
 };

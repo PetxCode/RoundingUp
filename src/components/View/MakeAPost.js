@@ -1,14 +1,24 @@
 import { Button, Input } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { app } from "../../base";
 import firebase from "firebase";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { AddProductAction } from "../../Redux/Actions/ProductActions";
+import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const postData = app.firestore().collection("donate");
 
 const MakeAPost = () => {
+  const products = useSelector((state) => state.myReducer.Products);
+  const dispatch = useDispatch();
+  console.log("Data: ", products);
+
   const [want, setWant] = useState("");
   const [type, setType] = useState("");
-  const [cost, setCost] = useState("");
+  const [cost1, setCost1] = useState("");
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
 
@@ -29,12 +39,25 @@ const MakeAPost = () => {
         want,
         title,
         type,
-        cost,
+        cost1,
         time: firebase.firestore.FieldValue.serverTimestamp(),
         createdBy: user.uid,
       });
     }
   };
+
+  const fetchData = async () => {
+    const res = await axios.get("https://fakestoreapi.com/products");
+
+    if (res) {
+      console.log(res.data);
+      dispatch(AddProductAction(res.data));
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div
@@ -92,9 +115,9 @@ const MakeAPost = () => {
 
         <Input
           placeholder="What will it COST"
-          value={cost}
+          value={cost1}
           onChange={(e) => {
-            setCost(e.target.value);
+            setCost1(e.target.value);
           }}
           style={{
             margin: "5px",
@@ -126,6 +149,50 @@ const MakeAPost = () => {
         >
           Summit your Request
         </Button>
+      </div>
+      <div style={{ marginTop: "40px" }}>the Redux:</div>
+      <div
+        style={{
+          marginTop: "20px",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        {products.map(({ category, title, id, price, description, image }) => (
+          <div
+            key={id}
+            style={{
+              width: "300px",
+              height: "350px",
+              backgroundColor: "lightblue",
+
+              margin: "15px",
+              borderRadius: "10px 10px 0 0",
+            }}
+          >
+            <Link to={`/products/${id}`}>
+              <img
+                src={image}
+                alt="img"
+                style={{
+                  width: "100%",
+                  height: "250px",
+                  objectFit: "cover",
+                  borderRadius: "10px 10px 0 0",
+                }}
+              />
+            </Link>
+            <div
+              style={{
+                paddingLeft: "10px",
+              }}
+            >
+              {" "}
+              {title}{" "}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import AboutScreen from "./AboutComp/AboutScreen";
 
 const About = () => {
   return (
@@ -7,7 +8,9 @@ const About = () => {
         marginTop: "50px",
       }}
     >
-      <div>This is the About Page</div>
+      <div>
+        <AboutScreen />
+      </div>
     </div>
   );
 };

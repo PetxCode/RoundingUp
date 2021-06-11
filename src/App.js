@@ -1,23 +1,30 @@
 import React from "react";
 import "antd/dist/antd.css";
-import LetBuild from "./StudyTime/LetBuild";
-import HeaderView from "./StudyTime/HeaderView";
-import NewHeader from "./StudyTime/NewHeader";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import About from "./StudyTime/About";
-import Contact from "./StudyTime/Contact";
+import HomeScreen from "./Styled/HomeScreen/HomeScreen";
+import img from "./asset/1.jpg";
+import img2 from "./asset/2.jpg";
 
 const App = () => {
   return (
     <div>
-      <Router>
-        <HeaderView />
-        <Switch>
-          <Route path="/" exact component={LetBuild} />
-          <Route path="/about" exact component={About} />
-          <Route path="/contact" exact component={Contact} />
-        </Switch>
-      </Router>
+      <div>
+        <HomeScreen
+          headerText="Experiences"
+          paraText="Drive API adoption by providing internal and external developers with always up-to-date interactive , tutorials, and code samples."
+          button1="Get Started"
+          button2="Start Free"
+          img={img}
+          reverse
+        />
+
+        <HomeScreen
+          headerText="Scale with Confidence"
+          paraText="Whether you work with a couple of APIs and collaborators, or you’re managing a large API program, we’ve made sharing APIs, tracking changes, managing dependencies, and creating style guides a breeze."
+          button1="View paln & price"
+          button2="click to start"
+          img={img2}
+        />
+      </div>
     </div>
   );
 };
